@@ -34,3 +34,18 @@
     loop:
     - { name: 'svm1_cluster2' }
     - { name: 'svm2_cluster2' }
+  - name: Peer SVMs
+    na_ontap_vserver_peer:
+      state: present
+      vserver: "{{ item.srcsvm }}"
+      peer_vserver: "{{ item.dstsvm }}"
+      peer_cluster: "cluster1"
+      applications: "snapmirror"
+      peer_options:
+        hostname: "cluster1"
+      <<: *input
+    loop:
+    - { srcsvm: 'svm1_cluster2', dstsvm: 'svm1_cluster1' }
+    - { srcsvm: 'svm2_cluster2', dstsvm: 'svm1_cluster1' }
+    - { srcsvm: 'svm1_cluster2', dstsvm: 'svm2_cluster1' }
+    - { srcsvm: 'svm2_cluster2', dstsvm: 'svm2_cluster1' }
