@@ -21,7 +21,7 @@
 - hosts: localhost
   gather_facts: false
   vars:
-    input: &input
+    input2: &input2
       hostname: 192.168.0.102
       username: "admin"
       password: "Netapp1!"
@@ -36,4 +36,4 @@
     state: present
     source_intercluster_lifs: "192.168.0.121,192.168.0.122"
     passphrase: "P@ssw0rd"
-    <<: *input
+    <<: *input2
