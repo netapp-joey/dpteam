@@ -17,6 +17,8 @@
     state: present
     dest_intercluster_lifs: "192.168.0.123,192.168.0.124"
     passphrase: "P@ssw0rd"
+    peer_options:
+      hostname: "cluster2"
     <<: *input
 - hosts: localhost
   gather_facts: false
@@ -36,4 +38,6 @@
     state: present
     source_intercluster_lifs: "192.168.0.121,192.168.0.122"
     passphrase: "P@ssw0rd"
+    peer_options:
+      hostname: "cluster1"
     <<: *input2
