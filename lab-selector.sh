@@ -10,6 +10,9 @@ done
 
 #install stuff if stuff isn't installed
 if ! test -f "$HOME/ansiblelabfile_nodelete"
+then
+	echo "Running first-time Install"
+ 	sleep 2s
 	#Upgrade pip
 	python3 -m pip install --upgrade pip
 	#Install ansible
@@ -21,6 +24,8 @@ if ! test -f "$HOME/ansiblelabfile_nodelete"
 
 	#Make the test file
 	touch "$HOME/ansiblelabfile_nodelete"
+ 	echo "Install done, running lab"
+  	sleep 2s
 fi
 
 #Get playbook
