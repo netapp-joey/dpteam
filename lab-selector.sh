@@ -29,7 +29,7 @@ then
 fi
 
 #Get playbook
-curl -L -o $playbook.yml https://github.com/netapp-joey/dpteam/blob/main/$playbook.yml
+curl -L -o $playbook.yml https://github.com/netapp-joey/dpteam/raw/main/$playbook.yml
 
 #play the playbook
 ansible-playbook $playbook.yml
