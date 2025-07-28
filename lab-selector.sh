@@ -24,7 +24,6 @@ if ! test -f "$HOME/ansiblelabfile_nodelete"
 fi
 
 #Get playbook
-#TO-DO: fix url
 curl -L -o $playbook.yml https://github.com/netapp-joey/dpteam/blob/main/$playbook.yml
 
 #play the playbook
