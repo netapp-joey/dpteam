@@ -14,10 +14,12 @@
   tasks:
   - name: Create cluster2 aggrs
     na_ontap_aggregate:
-    state: present
-    name: {{ item.aggr }}
-    disk_count: 12
-    <<: *input
-  loop:
-  - { aggr: 'cluster2_01_aggr' }
-  - { aggr: 'cluster2_02_aggr' }
+      state: present
+      service_state: online
+      name: "{{ item.aggr }}"
+      nodes: "{{ item.node }}"
+      disk_count: 12
+      <<: *input
+    loop:
+    - { aggr: 'cluster2_01_aggr', node: 'cluster2-01' }
+    - { aggr: 'cluster2_02_aggr', node: 'cluster2-02' }
