@@ -1,0 +1,23 @@
+#!/usr/bin/env ansible-playbook
+- hosts: localhost
+  gather_facts: false
+  vars:
+    input: &input
+      hostname: 192.168.0.101
+      username: "admin"
+      password: "Netapp1!"
+      https: true
+      validate_certs: false
+      use_rest: always
+  collections:
+  - netapp.ontap
+  tasks:
+  - name: Create a vol maybe
+    na_ontap_volume:
+      state: present
+      name: "volAnsible"
+      vserver: "svm1_cluster1"
+      aggregate_name: "cluster1_01_SSD_1"
+      size: 100
+      size_unit: mb
+      <<: *input
