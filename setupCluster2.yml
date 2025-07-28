@@ -23,3 +23,14 @@
     loop:
     - { aggr: 'cluster2_01_aggr', node: 'cluster2-01' }
     - { aggr: 'cluster2_02_aggr', node: 'cluster2-02' }
+  - name: Create SVM on cluster2
+    na_ontap_svm:
+      state: present
+      name: "{{ item.name }}"
+      services:
+        nfs:
+          allowed: true
+      <<: *input
+    loop:
+    - { name: 'svm1_cluster2' }
+    - { name: 'svm2_cluster2' }
