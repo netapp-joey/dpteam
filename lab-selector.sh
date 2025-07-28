@@ -25,7 +25,7 @@ fi
 
 #Get playbook
 #TO-DO: fix url
-curl -L -o $playbook.yml <github_url goes here>/$playbook.yml
+curl -L -o $playbook.yml https://github.com/netapp-joey/dpteam/blob/main/$playbook.yml
 
 #play the playbook
 ansible-playbook $playbook.yml
