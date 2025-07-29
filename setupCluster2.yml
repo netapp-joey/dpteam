@@ -32,8 +32,8 @@
           allowed: true
       <<: *input
     loop:
-    - { name: 'svm1_cluster2' }
-    - { name: 'svm2_cluster2' }
+    - { name: 'svmDst' }
+    - { name: 'svmDst2' }
   - name: Peer SVMs
     na_ontap_vserver_peer:
       state: present
@@ -45,7 +45,7 @@
         hostname: "cluster1"
       <<: *input
     loop:
-    - { srcsvm: 'svm1_cluster2', dstsvm: 'svm1_cluster1' }
-    - { srcsvm: 'svm2_cluster2', dstsvm: 'svm1_cluster1' }
-    - { srcsvm: 'svm1_cluster2', dstsvm: 'svm2_cluster1' }
-    - { srcsvm: 'svm2_cluster2', dstsvm: 'svm2_cluster1' }
+    - { srcsvm: 'svnDst', dstsvm: 'svmSrc' }
+    - { srcsvm: 'svmDst', dstsvm: 'svmSrc2' }
+    - { srcsvm: 'svmDst2', dstsvm: 'svmSrc' }
+    - { srcsvm: 'svmDst2', dstsvm: 'svmSrc2' }
