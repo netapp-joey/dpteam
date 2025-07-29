@@ -74,4 +74,4 @@
         hostname: "cluster1"
       <<: *input2
     loop:
-    - { srcsvm: 'svnDst', dstsvm: 'svmSrc' }
+    - { srcsvm: 'svmDst', dstsvm: 'svmSrc' }
