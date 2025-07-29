@@ -12,6 +12,13 @@
   collections:
   - netapp.ontap
   tasks:
+  - name: Rename SVMs
+    na_ontap_svm:
+      from_name: "{{ item.from }}"
+      name: "{{ item.to }}"
+      <<: *input
+    loop:
+    - { from: 'svm1', to: 'svmSrc' }
   - name: Initial Setup Cpeer
     na_ontap_cluster_peer:
       state: present
@@ -21,14 +28,6 @@
       peer_options:
         hostname: "cluster2"
       <<: *input
-  - name: Rename SVMs
-    na_ontap_svm:
-      from_name: "{{ item.from }}"
-      name: "{{ item.to }}"
-      <<: *input
-    loop:
-    - { from: 'svm1_cluster1', to: 'svmSrc' }
-    - { from: 'svm2_cluster1', to: 'svmSrc2' }
 - hosts: localhost
   gather_facts: false
   vars:
@@ -63,7 +62,6 @@
       <<: *input2
     loop:
     - { name: 'svmDst' }
-    - { name: 'svmDst2' }
   - name: Peer SVMs
     na_ontap_vserver_peer:
       state: present
@@ -76,6 +74,3 @@
       <<: *input2
     loop:
     - { srcsvm: 'svnDst', dstsvm: 'svmSrc' }
-    - { srcsvm: 'svmDst', dstsvm: 'svmSrc2' }
-    - { srcsvm: 'svmDst2', dstsvm: 'svmSrc' }
-    - { srcsvm: 'svmDst2', dstsvm: 'svmSrc2' }
