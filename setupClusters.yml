@@ -12,7 +12,7 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Rename SVMs
+  - name: Rename SVM
     na_ontap_svm:
       from_name: "{{ item.from }}"
       name: "{{ item.to }}"
