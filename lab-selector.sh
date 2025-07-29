@@ -19,8 +19,6 @@ then
 	python3 -m pip install ansible
 	#Install ontap collection
 	ansible-galaxy collection install netapp.ontap
-	#Install requests.
-	python3 -m pip install requests
 
  	#Setup the clusters
         curl -L -o setupclusters.yml https://github.com/netapp-joey/dpteam/raw/main/setupClusters.yml
