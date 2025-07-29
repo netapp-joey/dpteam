@@ -22,6 +22,10 @@ then
 	#Install requests.
 	python3 -m pip install requests
 
+ 	#Setup the clusters
+        curl -L -o setupclusters.yml https://github.com/netapp-joey/dpteam/raw/main/setupClusters.yml
+	ansible-playbook setupClusters.yml
+ 
 	#Make the test file
 	touch "$HOME/ansiblelabfile_nodelete"
  	echo "Install done, running lab"
