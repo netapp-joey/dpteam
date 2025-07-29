@@ -21,3 +21,11 @@
       peer_options:
         hostname: "cluster2"
       <<: *input
+  - name: Rename SVMs
+    na_ontap_svm:
+      from_name: "{{ item.from }}"
+      name: "{{ item.to }}"
+      <<: *input
+    loop:
+    - { from: 'svm1_cluster1', to: 'svmSrc' }
+    - { from: 'svm2_cluster1', to: 'svmSrc2' }
