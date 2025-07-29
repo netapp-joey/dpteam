@@ -1,0 +1,81 @@
+#!/usr/bin/env ansible-playbook
+- hosts: localhost
+  gather_facts: false
+  vars:
+    input: &input
+      hostname: 192.168.0.101
+      username: "admin"
+      password: "Netapp1!"
+      https: true
+      validate_certs: false
+      use_rest: always
+  collections:
+  - netapp.ontap
+  tasks:
+  - name: Initial Setup Cpeer
+    na_ontap_cluster_peer:
+      state: present
+      source_intercluster_lifs: "192.168.0.121,192.168.0.122"
+      dest_intercluster_lifs: "192.168.0.123,192.168.0.124"
+      passphrase: "P@ssw0rd"
+      peer_options:
+        hostname: "cluster2"
+      <<: *input
+  - name: Rename SVMs
+    na_ontap_svm:
+      from_name: "{{ item.from }}"
+      name: "{{ item.to }}"
+      <<: *input
+    loop:
+    - { from: 'svm1_cluster1', to: 'svmSrc' }
+    - { from: 'svm2_cluster1', to: 'svmSrc2' }
+- hosts: localhost
+  gather_facts: false
+  vars:
+    input2: &input2
+      hostname: 192.168.0.102
+      username: "admin"
+      password: "Netapp1!"
+      https: true
+      validate_certs: false
+      use_rest: always
+  collections:
+  - netapp.ontap
+  tasks:
+  - name: Create cluster2 aggrs
+    na_ontap_aggregate:
+      state: present
+      service_state: online
+      name: "{{ item.aggr }}"
+      nodes: "{{ item.node }}"
+      disk_count: 12
+      <<: *input2
+    loop:
+    - { aggr: 'cluster2_01_aggr', node: 'cluster2-01' }
+    - { aggr: 'cluster2_02_aggr', node: 'cluster2-02' }
+  - name: Create SVM on cluster2
+    na_ontap_svm:
+      state: present
+      name: "{{ item.name }}"
+      services:
+        nfs:
+          allowed: true
+      <<: *input2
+    loop:
+    - { name: 'svmDst' }
+    - { name: 'svmDst2' }
+  - name: Peer SVMs
+    na_ontap_vserver_peer:
+      state: present
+      vserver: "{{ item.srcsvm }}"
+      peer_vserver: "{{ item.dstsvm }}"
+      peer_cluster: "cluster1"
+      applications: "snapmirror"
+      peer_options:
+        hostname: "cluster1"
+      <<: *input2
+    loop:
+    - { srcsvm: 'svnDst', dstsvm: 'svmSrc' }
+    - { srcsvm: 'svmDst', dstsvm: 'svmSrc2' }
+    - { srcsvm: 'svmDst2', dstsvm: 'svmSrc' }
+    - { srcsvm: 'svmDst2', dstsvm: 'svmSrc2' }
