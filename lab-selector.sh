@@ -35,3 +35,7 @@ curl -L -o $playbook.yml https://github.com/netapp-joey/dpteam/raw/main/$playboo
 
 #play the playbook
 ansible-playbook $playbook.yml
+
+echo "############"
+echo "Lab started!"
+echo "############"
