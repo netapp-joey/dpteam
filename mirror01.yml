@@ -16,7 +16,7 @@
     na_ontap_job_schedule:
       state: present
       name: "1min"
-      job_minutes: 1
+      job_minutes: -1
       <<: *input
   - name: Setting up mirror01 lab pt 2/5
     na_ontap_snapshot_policy:
