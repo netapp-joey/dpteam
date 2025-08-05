@@ -21,7 +21,7 @@ then
 	ansible-galaxy collection install netapp.ontap
 
  	#Setup the clusters
-        curl -L -o setupclusters.yml https://github.com/netapp-joey/dpteam/raw/main/setupClusters.yml
+        curl -L -o setupClusters.yml https://github.com/netapp-joey/dpteam/raw/main/setupClusters.yml
 	ansible-playbook setupClusters.yml
  
 	#Make the test file
