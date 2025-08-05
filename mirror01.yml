@@ -31,7 +31,8 @@
   - name: Setting up mirror01 lab pt 3/5
     na_ontap_volume:
       state: present
-      aggregate_name: "cluster1_01_aggr"
+      vserver: "svmSrc"
+      aggregate_name: "cluster1_01_SSD_1"
       name: "production_volume"
       size: 100
       size_unit: "mb"
@@ -40,7 +41,7 @@
 - hosts: localhost
   gather_facts: false
   vars:
-      input2: &input2
+    input2: &input2
       hostname: 192.168.0.102
       username: "admin"
       password: "Netapp1!"
@@ -55,6 +56,7 @@
       state: present
       aggregate_name: "cluster2_01_aggr"
       name: "production_volume_dr"
+      vserver: "svmDst"
       size: 100
       size_unit: "mb"
       type: "dp"
