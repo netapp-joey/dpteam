@@ -74,7 +74,8 @@
       state: present
       vserver: "svmDst"
       policy_name: "mirror02SMPolicy"
-      policy_type: "vault"
+      policy_type: "async"
+      create_snapshot_on_source: false
       transfer_schedule: "mirror022min"
       snapmirror_label: ['prodsnap']
       keep: [25]
@@ -85,6 +86,6 @@
       source_vserver: "svmSrc"
       source_volume: "mirror02_prod_vol"
       destination_vserver: "svmDst"
-      destination_volume: "mirror2_prod_vol_bkup"
+      destination_volume: "mirror02_prod_vol_bkup"
       policy: "mirror02SMPolicy"
       <<: *input2
