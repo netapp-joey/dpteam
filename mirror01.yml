@@ -16,15 +16,15 @@
   - name: Setting up mirror01 lab pt 1/5
     na_ontap_job_schedule:
       state: present
-      name: "1min"
+      name: "mirror011min"
       job_minutes: -1
       <<: *input
   - name: Setting up mirror01 lab pt 2/5
     na_ontap_snapshot_policy:
       state: present
       vserver: "svmSrc"
-      name: "prodSnapshotPolicy"
-      schedule: "1min"
+      name: "mirror01prodSnapshotPolicy"
+      schedule: "mirror011min"
       prefix: "prodSnap"
       count: 10
       enabled: true
@@ -37,7 +37,7 @@
       name: "mirror01_prod_vol"
       size: 100
       size_unit: "mb"
-      snapshot_policy: "prodSnapshotPolicy"
+      snapshot_policy: "mirror01prodSnapshotPolicy"
       <<: *input
 - hosts: localhost
   gather_facts: false
