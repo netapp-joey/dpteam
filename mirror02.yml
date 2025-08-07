@@ -73,8 +73,8 @@
     na_ontap_snapmirror_policy:
       state: present
       vserver: "svmDst"
-      Policy_name: "mirror02SMPolicy"
-      Policy_type: "vault"
+      policy_name: "mirror02SMPolicy"
+      policy_type: "vault"
       transfer_schedule: "mirror022min"
       snapmirror_label: ['prodsnap']
       keep: [25]
