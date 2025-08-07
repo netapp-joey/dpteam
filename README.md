@@ -1,6 +1,6 @@
 Specific to LoD 9.16.1 early adopter lab
 - After the setup script, cluster1 has "svmSrc" and cluster2 has "svmDst" which are peered.
-- cluster1 has aggregates "cluster1_01_SSD_1" and "cluster1_02_SSD_2".
+- cluster1 has aggregates "cluster1_01_SSD_1" and "cluster1_02_SSD_1".
 - cluster2 has aggregates "cluster2_01_aggr" and "cluster2_02_aggr".
 - We can allow folks to run multiple labs if we keep volume names specific to the lab. You can also add "clean-up" files and instruct folks to run that if you want.
 
