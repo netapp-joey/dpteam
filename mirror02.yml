@@ -13,23 +13,24 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Setting up mirror02 lab pt 1/5
+  - name: Setting up mirror02 lab pt 1/7
     na_ontap_job_schedule:
       state: present
       name: "mirror021min"
       job_minutes: -1
       <<: *input
-  - name: Setting up mirror02 lab pt 2/5
+  - name: Setting up mirror02 lab pt 2/7
     na_ontap_snapshot_policy:
       state: present
       vserver: "svmSrc"
       name: "mirror02prodSnapshotPolicy"
       schedule: "mirror021min"
+      snapmirror_label: "prodSnap"
       prefix: "prodSnap"
       count: 10
       enabled: true
       <<: *input
-  - name: Setting up mirror02 lab pt 3/5
+  - name: Setting up mirror02 lab pt 3/7
     na_ontap_volume:
       state: present
       vserver: "svmSrc"
@@ -37,7 +38,7 @@
       name: "mirror02_prod_vol"
       size: 100
       size_unit: "mb"
-      snapshot_policy: "prodSnapshotPolicy"
+      snapshot_policy: "mirror02prodSnapshotPolicy"
       <<: *input
 - hosts: localhost
   gather_facts: false
@@ -52,7 +53,7 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Setting up mirror02 lab pt 4/5
+  - name: Setting up mirror02 lab pt 4/7
     na_ontap_volume:
       state: present
       aggregate_name: "cluster2_01_aggr"
@@ -62,12 +63,28 @@
       size_unit: "mb"
       type: "dp"
       <<: *input2
-  - name: Setting up mirror02 lab pt 5/5
+  - name: Setting up mirror02 lab pt 5/7
+    na_ontap_job_schedule:
+      state: present
+      name: "mirror022min"
+      job_minutes: 2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,0
+      <<: *input2
+  - name: Setting up mirror02 lab pt 6/7
+    na_ontap_snapmirror_policy:
+      state: present
+      vserver: "svmDst"
+      Policy_name: "mirror02SMPolicy"
+      Policy_type: "vault"
+      transfer_schedule: "mirror022min"
+      snapmirror_label: ['prodsnap']
+      keep: [25]
+      <<: *input
+  - name: Setting up mirror02 lab pt 7/7
     na_ontap_snapmirror:
       state: present
       source_vserver: "svmSrc"
       source_volume: "mirror02_prod_vol"
       destination_vserver: "svmDst"
       destination_volume: "mirror2_prod_vol_bkup"
-      policy: "MirrorAllSnapshots"
+      policy: "mirror02SMPolicy"
       <<: *input2
