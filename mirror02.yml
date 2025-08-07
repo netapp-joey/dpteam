@@ -67,7 +67,7 @@
     na_ontap_job_schedule:
       state: present
       name: "mirror022min"
-      job_minutes: 2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,0
+      job_minutes: 0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58
       <<: *input2
   - name: Setting up mirror02 lab pt 6/7
     na_ontap_snapmirror_policy:
@@ -78,7 +78,7 @@
       transfer_schedule: "mirror022min"
       snapmirror_label: ['prodsnap']
       keep: [25]
-      <<: *input
+      <<: *input2
   - name: Setting up mirror02 lab pt 7/7
     na_ontap_snapmirror:
       state: present
