@@ -33,7 +33,7 @@
       state: present
       vserver: "svmSrc"
       aggregate_name: "cluster1_01_SSD_1"
-      name: "production_volume"
+      name: "mirror01_prod_vol"
       size: 100
       size_unit: "mb"
       snapshot_policy: "prodSnapshotPolicy"
@@ -55,7 +55,7 @@
     na_ontap_volume:
       state: present
       aggregate_name: "cluster2_01_aggr"
-      name: "production_volume_dr"
+      name: "mirror01_prod_vol_dr"
       vserver: "svmDst"
       size: 100
       size_unit: "mb"
@@ -65,8 +65,8 @@
     na_ontap_snapmirror:
       state: present
       source_vserver: "svmSrc"
-      source_volume: "production_volume"
+      source_volume: "mirror01_prod_vol"
       destination_vserver: "svmDst"
-      destination_volume: "production_volume_dr"
+      destination_volume: "mirror01_prod_vol_dr"
       policy: "MirrorAllSnapshots"
       <<: *input2
