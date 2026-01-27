@@ -73,6 +73,6 @@
       interface_name: "{{ item.icname }}"
       vserver: cluster2
       <<: *input2
-   loop:
-   - { icname: 'ic1' }
-   - { icname: 'ic2' }
+    loop:
+    - { icname: 'ic1' }
+    - { icname: 'ic2' }
