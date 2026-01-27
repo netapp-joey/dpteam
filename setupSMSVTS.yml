@@ -76,7 +76,7 @@
       name: "5minSnapshotPolicy"
       schedule: "mirror30min"
       prefix: "prodSnap30min"
-      count: 10
+      count: 5
       enabled: true
       <<: *input
   - name: Create volume 2
@@ -85,6 +85,16 @@
       vserver: "svmSrc"
       aggregate_name: "cluster1_01_SSD_1"
       name: "prodVol2"
+      size: 5000
+      size_unit: "mb"
+      snapshot_policy: "prodSnap30min"
+      <<: *input
+  - name: Create volume 3
+    na_ontap_volume:
+      state: present
+      vserver: "svmSrc"
+      aggregate_name: "cluster1_01_SSD_1"
+      name: "prodVol3"
       size: 5000
       size_unit: "mb"
       snapshot_policy: "prodSnap30min"
