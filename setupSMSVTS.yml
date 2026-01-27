@@ -25,21 +25,10 @@
       dest_cluster_name: cluster2
       dest_hostname: 192.168.0.102
       <<: *input
-  - name: Down IC LIFs
-    na_ontap_interface:
-      state: present
-      interface_name: "{{ item.icname }}"
-      vserver: cluster1
-      admin_status: down
-      <<: *input
-    loop:
-    - { icname: 'ic1' }
-    - { icname: 'ic2' }
   - name: Remove IC LIFs
     na_ontap_interface:
       state: absent
       interface_name: "{{ item.icname }}"
-      vserver: cluster1
       <<: *input
     loop:
     - { icname: 'ic1' }
@@ -57,21 +46,10 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Down IC LIFs
-    na_ontap_interface:
-      state: present
-      interface_name: "{{ item.icname }}"
-      vserver: cluster2
-      admin_status: down
-      <<: *input2
-    loop:
-    - { icname: 'ic1' }
-    - { icname: 'ic2' }
   - name: Remove IC LIFs
     na_ontap_interface:
       state: absent
       interface_name: "{{ item.icname }}"
-      vserver: cluster2
       <<: *input2
     loop:
     - { icname: 'ic1' }
