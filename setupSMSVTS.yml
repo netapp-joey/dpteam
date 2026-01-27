@@ -140,6 +140,14 @@
     na_ontap_command:
       command: "set d -c off;sis off *"
       <<: *input
+  - name: Add data
+    na_ontap_command:
+      command: "set d -c off;run cluster1-01 mkfile 500m /vol/prodFGvol__0001/file 1"
+      <<: *input
+  - name: Add data
+    na_ontap_command:
+      command: "set d -c off;run cluster1-01 mkfile 500m /vol/prodFGvol__0002/file2 1"
+      <<: *input
 - hosts: localhost
   gather_facts: false
   vars:
