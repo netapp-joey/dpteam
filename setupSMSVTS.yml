@@ -33,6 +33,30 @@
     loop:
     - { icname: 'ic1' }
     - { icname: 'ic2' }
+  - name: Create volume CG1
+    na_ontap_volume:
+      state: present
+      vserver: "svmSrc"
+      aggregate_name: "cluster1_01_SSD_1"
+      name: "volCG1"
+      space_guarantee: "none"
+      efficiency_policy: default
+      size: 3000
+      size_unit: "mb"
+      snapshot_policy: "none"
+      <<: *input
+  - name: Create volume CG1
+    na_ontap_volume:
+      state: present
+      vserver: "svmSrc"
+      aggregate_name: "cluster1_01_SSD_1"
+      name: "volCG2"
+      space_guarantee: "none"
+      efficiency_policy: default
+      size: 3000
+      size_unit: "mb"
+      snapshot_policy: "none"
+      <<: *input
   - name: Add job schedule
     na_ontap_job_schedule:
       state: present
@@ -49,7 +73,7 @@
       count: 10
       enabled: true
       <<: *input
-  - name: Create volume
+  - name: Create volume 1
     na_ontap_volume:
       state: present
       vserver: "svmSrc"
@@ -57,7 +81,7 @@
       name: "prodVol1"
       space_guarantee: "none"
       efficiency_policy: default
-      size: 5000
+      size: 3000
       size_unit: "mb"
       snapshot_policy: "5minSnapshotPolicy"
       <<: *input
@@ -90,7 +114,7 @@
       name: "prodVol2"
       space_guarantee: "none"
       efficiency_policy: default
-      size: 5000
+      size: 3000
       size_unit: "mb"
       snapshot_policy: "30minSnapshotPolicy"
       <<: *input
@@ -102,7 +126,7 @@
       name: "prodVol3"
       space_guarantee: "none"
       efficiency_policy: default
-      size: 5000
+      size: 3000
       size_unit: "mb"
       snapshot_policy: "30minSnapshotPolicy"
       <<: *input
@@ -132,6 +156,8 @@
       - "cluster1_02_SSD_1"
       aggr_list_multiplier: 2
       efficiency_policy: none
+      size: 4000
+      size_unit: "mb"
       name: "prodFGvol"
       space_guarantee: "none"
       snapshot_policy: "30minSnapshotPolicy2"
