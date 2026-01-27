@@ -45,7 +45,7 @@
       vserver: "svmSrc"
       name: "5minSnapshotPolicy"
       schedule: "mirror5min"
-      prefix: "prodSnap"
+      prefix: "prodSnap5min"
       count: 10
       enabled: true
       <<: *input
@@ -62,6 +62,32 @@
   - name: Add data
     na_ontap_command:
       command: "set d -c off;run cluster1-01 mkfile 1m /vol/prodVol1/file 2000"
+      <<: *input
+  - name: Add job schedule 2
+    na_ontap_job_schedule:
+      state: present
+      name: "mirror30min"
+      job_minutes: 2,32
+      <<: *input
+  - name: Add Snapshot policy 2
+    na_ontap_snapshot_policy:
+      state: present
+      vserver: "svmSrc"
+      name: "5minSnapshotPolicy"
+      schedule: "mirror30min"
+      prefix: "prodSnap30min"
+      count: 10
+      enabled: true
+      <<: *input
+  - name: Create volume 2
+    na_ontap_volume:
+      state: present
+      vserver: "svmSrc"
+      aggregate_name: "cluster1_01_SSD_1"
+      name: "prodVol2"
+      size: 5000
+      size_unit: "mb"
+      snapshot_policy: "prodSnap30min"
       <<: *input
 - hosts: localhost
   gather_facts: false
