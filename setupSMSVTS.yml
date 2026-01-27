@@ -124,8 +124,10 @@
     na_ontap_volume:
       state: present
       vserver: "svmSrc"
-      aggr_list: "cluster1_01_SSD_1"
-      aggr_list_multiplier: 4
+      aggr_list:
+      - "cluster1_01_SSD_1"
+      - "cluster1_02_SSD_1"
+      aggr_list_multiplier: 2
       name: "prodFGvol"
       space_guarantee: "none"
       snapshot_policy: "30minSnapshotPolicy2"
