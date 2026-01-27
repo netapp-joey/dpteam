@@ -30,9 +30,9 @@
       interface_name: "{{ item.icname }}"
       vserver: cluster1
       <<: *input
-      loop:
-      - { icname: 'ic1' }
-      - { icname: 'ic2' }
+    loop:
+    - { icname: 'ic1' }
+    - { icname: 'ic2' }
 - hosts: localhost
   gather_facts: false
   vars:
