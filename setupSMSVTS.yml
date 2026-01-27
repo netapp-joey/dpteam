@@ -89,6 +89,7 @@
       aggregate_name: "cluster1_01_SSD_1"
       name: "prodVol2"
       space_guarantee: "none"
+      efficiency_policy: default
       size: 5000
       size_unit: "mb"
       snapshot_policy: "30minSnapshotPolicy"
@@ -100,6 +101,7 @@
       aggregate_name: "cluster1_01_SSD_1"
       name: "prodVol3"
       space_guarantee: "none"
+      efficiency_policy: default
       size: 5000
       size_unit: "mb"
       snapshot_policy: "30minSnapshotPolicy"
