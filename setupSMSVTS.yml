@@ -136,6 +136,10 @@
       space_guarantee: "none"
       snapshot_policy: "30minSnapshotPolicy2"
       <<: *input
+  - name: SE Edit
+    na_ontap_command:
+      command: "set d -c off;sis off *"
+      <<: *input
 - hosts: localhost
   gather_facts: false
   vars:
