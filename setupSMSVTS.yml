@@ -23,6 +23,7 @@
       state: absent
       source_cluster_name: cluster1
       dest_cluster_name: cluster2
+      dest_hostname: 192.168.0.102
       <<: *input
   - name: Remove IC LIFs
     na_ontap_interface:
