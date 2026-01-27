@@ -76,6 +76,7 @@
       name: "5minSnapshotPolicy"
       schedule: "mirror30min"
       prefix: "prodSnap30min"
+      snapmirror_label: "30min"
       count: 5
       enabled: true
       <<: *input
