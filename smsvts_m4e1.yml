@@ -26,5 +26,5 @@
       <<: *input
   - name: SE Edit
     na_ontap_command:
-      command: "set d -c off;sis off *"
+      command: "set d -c off;sis off volSync"
       <<: *input
