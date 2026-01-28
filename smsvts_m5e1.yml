@@ -16,6 +16,7 @@
     na_ontap_svm:
       state: present
       name: svmProd
+      hostname: svmProd
       root_volume: svmProd_root
       root_volume_aggregate: cluster1_01_SSD_1
       root_volume_security_style: unix
