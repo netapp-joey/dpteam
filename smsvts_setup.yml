@@ -45,7 +45,7 @@
       size_unit: "mb"
       snapshot_policy: "none"
       <<: *input
-  - name: Create volume CG1
+  - name: Create volume CG2
     na_ontap_volume:
       state: present
       vserver: "svmSrc"
