@@ -151,7 +151,7 @@
       - "cluster1_01_SSD_1"
       - "cluster1_02_SSD_1"
       aggr_list_multiplier: 2
-      efficiency_policy: none
+      efficiency_policy: default
       size: 4000
       size_unit: "mb"
       name: "prodFGvol"
