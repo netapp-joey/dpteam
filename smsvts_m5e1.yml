@@ -22,7 +22,7 @@
   - name: Create volume 1
     na_ontap_volume:
       state: present
-      vserver: "svmSrc"
+      vserver: "svmProd"
       aggregate_name: "cluster1_01_SSD_1"
       name: "volHR"
       space_guarantee: "none"
@@ -31,15 +31,29 @@
       size_unit: "mb"
       snapshot_policy: "5minSnapshotPolicy"
       <<: *input
-  - name: Create volume 1
+  - name: Create volume 2
     na_ontap_volume:
       state: present
-      vserver: "svmSrc"
-      aggregate_name: "cluster1_01_SSD_1"
+      vserver: "svmProd"
+      aggregate_name: "cluster1_02_SSD_1"
       name: "volHR"
       space_guarantee: "none"
       efficiency_policy: default
       size: 100
       size_unit: "mb"
       snapshot_policy: "5minSnapshotPolicy"
+      <<: *input
+  - name: Create Data LIF
+    na_ontap_interface:
+      state: present
+      interface_name: dataLif1
+      protocols:
+      - nfs
+      - cifs
+      home_port: e0d
+      home_node: cluster1-01
+      service_policy: "default-data-files"
+      address: 192.168.0.141
+      netmask: 255.255.255.0
+      vserver: svmProd
       <<: *input
