@@ -85,10 +85,6 @@
       size_unit: "mb"
       snapshot_policy: "5minSnapshotPolicy"
       <<: *input
-  - name: Add data
-    na_ontap_command:
-      command: "set d -c off;run cluster1-01 mkfile 1m /vol/prodVol1/file 2000"
-      <<: *input
   - name: Add job schedule 2
     na_ontap_job_schedule:
       state: present
