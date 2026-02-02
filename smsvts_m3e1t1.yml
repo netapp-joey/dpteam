@@ -1,0 +1,21 @@
+# Cheating doesn't help you learn.
+- hosts: localhost
+  gather_facts: false
+  vars:
+    input2: &input2
+      hostname: 192.168.0.102
+      username: "admin"
+      password: "Netapp1!"
+      https: true
+      validate_certs: false
+      use_rest: always
+  collections:
+  - netapp.ontap
+  tasks:
+  - name: Task1
+    na_ontap_snapmirror:
+      state: present
+      relationship_state: broken
+      destination_path: "*"
+      <<: *input2
+      
