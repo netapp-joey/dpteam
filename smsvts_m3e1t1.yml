@@ -16,6 +16,8 @@
     na_ontap_snapmirror:
       state: present
       relationship_state: broken
-      destination_path: "*"
+      source_endpoint:
+        path: "svmSrc:prodVol1"
+      destination_endpoint:
+        path: "svmDst:prodVol1_IC_dest"
       <<: *input2
-      
