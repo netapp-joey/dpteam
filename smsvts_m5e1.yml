@@ -44,7 +44,7 @@
       state: present
       vserver: "svmProd"
       aggregate_name: "cluster1_02_SSD_1"
-      name: "volHR"
+      name: "volFinance"
       space_guarantee: "none"
       efficiency_policy: default
       size: 100
