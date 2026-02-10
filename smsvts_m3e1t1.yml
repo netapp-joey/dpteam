@@ -12,12 +12,7 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Task1
-    na_ontap_snapmirror:
-      state: present
-      relationship_state: broken
-      source_endpoint:
-        path: "svmSrc:prodVol1"
-      destination_endpoint:
-        path: "svmDst:prodVol1_IC_dest"
+  - name: Add data
+    na_ontap_command:
+      command: "set d -c off;snapmirror break {* -policy-type mirror-vault}"
       <<: *input2
