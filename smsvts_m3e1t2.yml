@@ -13,7 +13,7 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Add data
+  - name: Do thing 1
     na_ontap_command:
       command: "set d -c off;net int modify {* -role intercluster} -status-admin down"
       <<: *input
