@@ -13,7 +13,7 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Add data
+  - name: Do thing 1
     na_ontap_command:
       command: "set d -c off;vol modify -vserver svmProd -volume volHR -vserver-dr-protection unprotected"
       <<: *input
@@ -30,7 +30,7 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Add data
+  - name: Do thing 2
     na_ontap_command:
       command: "set d -c off;snapmirror update svmDR:"
       <<: *input2
