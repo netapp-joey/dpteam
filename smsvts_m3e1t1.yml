@@ -12,7 +12,7 @@
   collections:
   - netapp.ontap
   tasks:
-  - name: Add data
+  - name: Do thing 1
     na_ontap_command:
       command: "set d -c off;snapmirror break {* -policy-type mirror-vault}"
       <<: *input2
